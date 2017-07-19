@@ -1,4 +1,4 @@
-package com.fbellotti.microservice.common;
+package com.fbellotti.vertx.api;
 
 import io.vertx.circuitbreaker.CircuitBreaker;
 import io.vertx.circuitbreaker.CircuitBreakerOptions;
