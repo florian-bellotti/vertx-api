@@ -117,6 +117,19 @@ public abstract class BaseMicroserviceVerticle extends AbstractVerticle {
     vertx.eventBus().publish(LOG_EVENT_ADDRESS, msg);
   }
 
+  protected void publishGatewayLog(String info) {
+    JsonObject message = new JsonObject()
+      .put("info", info)
+      .put("time", System.currentTimeMillis());
+    publishLogEvent("gateway", message);
+  }
+
+  protected void publishGatewayLog(JsonObject msg) {
+    JsonObject message = msg.copy()
+      .put("time", System.currentTimeMillis());
+    publishLogEvent("gateway", message);
+  }
+
   @Override
   public void stop(Future<Void> future) throws Exception {
     // In current design, the publisher is responsible for removing the service
