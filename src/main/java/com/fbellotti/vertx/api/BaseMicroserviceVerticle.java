@@ -52,6 +52,13 @@ public abstract class BaseMicroserviceVerticle extends AbstractVerticle {
     );
   }
 
+  protected Future<Void> publishHttpEndpoint(String name, String host, int port) {
+    Record record = HttpEndpoint.createRecord(name, host, port, "/",
+      new JsonObject().put("api.name", config().getString("api.name", ""))
+    );
+    return publish(record);
+  }
+
   protected Future<Void> publishApiGateway(String host,int port) {
     Record record = HttpEndpoint.createRecord("api-gateway", true, host, port, "/", null)
       .setType("api-gateway");

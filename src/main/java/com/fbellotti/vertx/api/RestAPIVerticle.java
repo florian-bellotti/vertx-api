@@ -252,6 +252,12 @@ public abstract class RestAPIVerticle extends BaseMicroserviceVerticle {
 
   // helper method dealing with failure
 
+  protected void badRequest(RoutingContext context, String message) {
+    context.response().setStatusCode(400)
+      .putHeader("content-type", "application/json")
+      .end(new JsonObject().put("error", message).encodePrettily());
+  }
+
   protected void badRequest(RoutingContext context, Throwable ex) {
     context.response().setStatusCode(400)
       .putHeader("content-type", "application/json")
